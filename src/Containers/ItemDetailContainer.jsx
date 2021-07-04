@@ -20,7 +20,7 @@ const ItemDetailContainer = () => {
 
   return (
     <Grid container justify="center" spacing={4}>
-      <Grid item xs={12} sm={12} lg={12}>
+      <Grid item xs={12} sm={12} lg={8}>
         <ItemDetail {...product} />
       </Grid>
     </Grid>
