@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardMedia, CardContent, Typography } from "@material-ui/core";
 
-import useStyles from "./ItemDetail.js";
+import useStyles from "./itemDet";
 
 const ItemDetail = ({ pictureUrl, title, description }) => {
   const classes = useStyles();
