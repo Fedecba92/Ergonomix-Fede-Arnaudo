@@ -6,6 +6,7 @@ import ItemList from "../components/List/ItemList";
 const ItemListContainer = () => {
   const { categoryName } = useParams();
   const [products, setProducts] = useState([]);
+
   useEffect(() => {
     (async () => {
       const { data } = await axios.get(
@@ -16,6 +17,7 @@ const ItemListContainer = () => {
       setProducts(catProd);
     })();
   }, [categoryName]);
+
   return (
     <div>
       <ItemList products={products} />
