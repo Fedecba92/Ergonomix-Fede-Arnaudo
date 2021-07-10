@@ -9,6 +9,7 @@ import ExpandNavbar from "../components/Header/ExpandNavbar";
 import { CartProvider } from "../Context/CartContext";
 import { makeStyles, Hidden } from "@material-ui/core";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Cart from "../components/Cart/Cart";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,6 +56,9 @@ const Container = () => {
               <Route path="/about" component={About} />
               <Route path="/item/:id">
                 <ItemDetailContainer />
+              </Route>
+              <Route path="/cart">
+                <Cart />
               </Route>
             </div>
           </Switch>

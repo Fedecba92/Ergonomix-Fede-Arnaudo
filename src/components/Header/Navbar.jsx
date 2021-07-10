@@ -10,6 +10,7 @@ import {
 
 import MenuIcon from "@material-ui/icons/Menu";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -49,15 +50,16 @@ const Navbar = ({ handleDrawerToggle }) => {
           <Typography variant="h6" className={classes.title}>
             Ergonomix
           </Typography>
-
-          <Button variant="text" color="default">
-            <ShoppingCartIcon
-              aria-label="cart icon"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              color="inherit"
-            ></ShoppingCartIcon>
-          </Button>
+          <Link to="/cart">
+            <Button variant="text" color="default">
+              <ShoppingCartIcon
+                aria-label="cart icon"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                color="inherit"
+              ></ShoppingCartIcon>
+            </Button>
+          </Link>
         </Toolbar>
       </AppBar>
     </div>
