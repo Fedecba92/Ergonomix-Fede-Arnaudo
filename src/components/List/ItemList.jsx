@@ -8,7 +8,7 @@ const ItemList = ({ products }) => {
       <Grid container justify="center" spacing={4}>
         {products.map((product) => (
           <Grid item key={product.id} xs={12} sm={6} lg={4}>
-            <Item {...product} />
+            <Item product={product} />
           </Grid>
         ))}
       </Grid>

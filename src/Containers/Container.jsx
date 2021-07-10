@@ -6,6 +6,7 @@ import ItemDetailContainer from "./ItemDetailContainer";
 import Navbar from "../components/Header/Navbar";
 import ItemListContainer from "./ItemListContainer";
 import ExpandNavbar from "../components/Header/ExpandNavbar";
+import { CartProvider } from "../Context/CartContext";
 import { makeStyles, Hidden } from "@material-ui/core";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -29,35 +30,37 @@ const Container = () => {
     setOpen(!open);
   };
   return (
-    <Router>
-      <div className={classes.root}>
-        <Navbar handleDrawerToggle={handleDrawerToggle} />
-        <Hidden xsDown>
-          <ExpandNavbar variant="permanent" open={true} />
-        </Hidden>
-        <Hidden smUp>
-          <ExpandNavbar
-            variant="temporary"
-            open={open}
-            onClose={handleDrawerToggle}
-          />
-        </Hidden>
-        <Switch>
-          <div className={classes.content}>
-            <div className={classes.toolbar}></div>
+    <CartProvider>
+      <Router>
+        <div className={classes.root}>
+          <Navbar handleDrawerToggle={handleDrawerToggle} />
+          <Hidden xsDown>
+            <ExpandNavbar variant="permanent" open={true} />
+          </Hidden>
+          <Hidden smUp>
+            <ExpandNavbar
+              variant="temporary"
+              open={open}
+              onClose={handleDrawerToggle}
+            />
+          </Hidden>
+          <Switch>
+            <div className={classes.content}>
+              <div className={classes.toolbar}></div>
 
-            <Route path="/" exact component={home} />
-            <Route path="/category/:categoryName">
-              <ItemListContainer />
-            </Route>
-            <Route path="/about" component={About} />
-            <Route path="/item/:id">
-              <ItemDetailContainer />
-            </Route>
-          </div>
-        </Switch>
-      </div>
-    </Router>
+              <Route path="/" exact component={home} />
+              <Route path="/category/:categoryName">
+                <ItemListContainer />
+              </Route>
+              <Route path="/about" component={About} />
+              <Route path="/item/:id">
+                <ItemDetailContainer />
+              </Route>
+            </div>
+          </Switch>
+        </div>
+      </Router>
+    </CartProvider>
   );
 };
 

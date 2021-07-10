@@ -1,23 +1,44 @@
 import React from "react";
-import { Card, CardMedia, CardContent, Typography } from "@material-ui/core";
+import ItemCount from "./ItemCount";
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  CardActions,
+} from "@material-ui/core";
 
 import useStyles from "./itemDet";
+import { useCartContext } from "../../Context/CartContext";
 
-const ItemDetail = ({ pictureUrl, title, description }) => {
+const ItemDetail = ({ product }) => {
   const classes = useStyles();
+  const { cart, addToCart } = useCartContext();
+  console.log(cart);
+  const onAdd = (qty) => addToCart(product, qty);
+
   return (
     <Card className={classes.Root}>
-      <CardMedia className={classes.media} image={pictureUrl} title={title} />
+      <CardMedia
+        className={classes.media}
+        image={product.pictureUrl}
+        title={product.title}
+      />
       <CardContent>
         <div className={classes.cardContent}>
           <Typography variant="h5" gutterBottom>
-            {title}
+            {product.title}
           </Typography>
-          <Typography variant="body2" m={2} color="textSecondary">
-            {description}
+          <Typography variant="body1" m={2} color="textSecondary">
+            {product.description}
           </Typography>
         </div>
       </CardContent>
+      <CardActions disableSpacing className={classes.cardActions}>
+        {product.quantity > 0 && (
+          <ItemCount onAdd={onAdd} stock={product.quantity} mx="auto" />
+        )}
+      </CardActions>
     </Card>
   );
 };
