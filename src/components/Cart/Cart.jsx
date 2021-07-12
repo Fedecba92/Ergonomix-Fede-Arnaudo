@@ -11,13 +11,19 @@ import {
 } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 import useStyles from "./styles";
 
 const Cart = () => {
   const classes = useStyles();
 
-  const { cart, clearCart } = useCartContext();
+  const { cart, clearCart, removeProd } = useCartContext();
+
+  const deleteProd = (Prod) => {
+    console.log("productos a Eliminar:", Prod);
+    removeProd(Prod);
+  };
 
   if (!cart.length) return <Redirect to="/" />;
 
@@ -45,10 +51,16 @@ const Cart = () => {
                   </Typography>
                 </div>
               </CardContent>
-              <CardActions
-                disableSpacing
-                className={classes.cardActions}
-              ></CardActions>
+              <CardActions disableSpacing className={classes.cardActions}>
+                <IconButton
+                  aria-label="Remove product"
+                  onClick={() => {
+                    deleteProd(product);
+                  }}
+                >
+                  <DeleteIcon color="secondary" />
+                </IconButton>
+              </CardActions>
             </Card>
           </Grid>
         ))}
