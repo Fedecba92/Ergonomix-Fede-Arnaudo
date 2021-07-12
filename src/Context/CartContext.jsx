@@ -13,11 +13,18 @@ export const CartProvider = ({ children }) => {
 
   const isInCart = (id) => cart.some((item) => item.id === id);
 
-  const addToCart = (item, quantity) => {
+  const addToCart = (item, quantity, stock) => {
     if (isInCart(item.id)) {
       const newCart = cart.map((cartElement) => {
         if (cartElement.id === item.id) {
-          return { ...cartElement, quantity: cartElement.quantity + quantity };
+          return {
+            ...cartElement,
+            quantity: cartElement.quantity + quantity,
+            stock:
+              cartElement.stock <= 0
+                ? alert("Not available stock")
+                : cartElement.stock - quantity,
+          };
         } else return cartElement;
       });
       setCart(newCart);
@@ -29,7 +36,7 @@ export const CartProvider = ({ children }) => {
   useEffect(() => {
     (async () => {
       const { data } = await axios.get(
-        "https://run.mocky.io/v3/5a206849-b4e1-47de-a0f6-392bd22f06b3"
+        "https://run.mocky.io/v3/79996c74-4a2f-4bc9-a42b-1e61707bd921"
       );
 
       setDatabase(data);

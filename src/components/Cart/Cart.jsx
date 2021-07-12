@@ -1,20 +1,61 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { useCartContext } from "../../Context/CartContext";
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  CardActions,
+  IconButton,
+} from "@material-ui/core";
+import { Grid } from "@material-ui/core";
+import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
+
+import useStyles from "./styles";
 
 const Cart = () => {
+  const classes = useStyles();
   const { cart, clearCart } = useCartContext();
 
   if (!cart.length) return <Redirect to="/" />;
 
   return (
     <div>
-      {cart.map((prod) => (
-        <h1>
-          Product: {prod.title} x {prod.quantity}
-        </h1>
-      ))}
-      <button onClick={clearCart}>Empty cart</button>
+      <Grid container justify="center" spacing={4}>
+        {cart.map((product) => (
+          <Grid item key={product.id} xs={12} sm={6} lg={3}>
+            <Card className={classes.Root}>
+              <CardMedia
+                className={classes.media}
+                image={product.pictureUrl}
+                title={product.title}
+              />
+              <CardContent>
+                <div className={classes.cardContent}>
+                  <Typography variant="h5" gutterBottom>
+                    {product.title}
+                  </Typography>
+                  <Typography variant="h5" gutterBottom>
+                    x {product.quantity}
+                  </Typography>
+                  <Typography variant="h5" gutterBottom>
+                    $ {product.price * product.quantity}
+                  </Typography>
+                </div>
+              </CardContent>
+              <CardActions
+                disableSpacing
+                className={classes.cardActions}
+              ></CardActions>
+            </Card>
+          </Grid>
+        ))}
+        <IconButton aria-label="empty cart" onClick={clearCart}>
+          Empty cart
+          <RemoveShoppingCartIcon color="secondary" className={classes.empty} />
+        </IconButton>
+      </Grid>
     </div>
   );
 };

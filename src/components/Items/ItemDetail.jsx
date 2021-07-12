@@ -15,7 +15,10 @@ const ItemDetail = ({ product }) => {
   const classes = useStyles();
   const { cart, addToCart } = useCartContext();
   console.log(cart);
-  const onAdd = (qty) => addToCart(product, qty);
+  const onAdd = (qty) => {
+    addToCart(product, qty);
+    alert("Product added to cart");
+  };
 
   return (
     <Card className={classes.Root}>
@@ -35,9 +38,12 @@ const ItemDetail = ({ product }) => {
         </div>
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
-        {product.quantity > 0 && (
-          <ItemCount onAdd={onAdd} stock={product.quantity} mx="auto" />
+        {product.stock > 0 && (
+          <ItemCount onAdd={onAdd} stock={product.stock} mx="auto" />
         )}
+        {/* <Typography variant="h4" m={2} gutterBottom>
+          Available stock: {product.stock}
+        </Typography> */}
       </CardActions>
     </Card>
   );
