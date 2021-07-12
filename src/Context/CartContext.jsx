@@ -26,10 +26,6 @@ export const CartProvider = ({ children }) => {
           return {
             ...cartElement,
             quantity: cartElement.quantity + quantity,
-            stock:
-              cartElement.stock <= 0
-                ? alert("Not available stock")
-                : cartElement.stock - quantity,
           };
         } else return cartElement;
       });

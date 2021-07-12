@@ -49,10 +49,6 @@ const ItemDetail = ({ product }) => {
             <IconButton>Finish shopping</IconButton>
           </Link>
         )}
-
-        {/* <Typography variant="h4" m={2} gutterBottom>
-          Available stock: {product.stock}
-        </Typography> */}
       </CardActions>
     </Card>
   );

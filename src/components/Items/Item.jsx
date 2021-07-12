@@ -8,17 +8,17 @@ import {
   Typography,
 } from "@material-ui/core";
 
-import ItemCount from "./ItemCount";
+//import ItemCount from "./ItemCount";
 import useStyles from "./styles.js";
-import { useCartContext } from "../../Context/CartContext";
+//import { useCartContext } from "../../Context/CartContext";
 
 const Item = ({ product }) => {
-  const { cart, addToCart } = useCartContext();
-  console.log(cart);
-  const onAdd = (qty) => {
-    addToCart(product, qty);
-    alert("Product added to cart");
-  };
+  // const { cart, addToCart } = useCartContext();
+  // console.log(cart);
+  // const onAdd = (qty) => {
+  //   addToCart(product, qty);
+  //   alert("Product added to cart");
+  // };
   const classes = useStyles();
   return (
     <Card className={classes.Root}>
@@ -40,11 +40,11 @@ const Item = ({ product }) => {
           </Typography>
         </div>
       </CardContent>
-      <CardActions disableSpacing className={classes.cardActions}>
+      {/* <CardActions disableSpacing className={classes.cardActions}>
         {product.stock > 0 && (
           <ItemCount onAdd={onAdd} stock={product.stock} mx="auto" />
         )}
-      </CardActions>
+      </CardActions> */}
     </Card>
   );
 };

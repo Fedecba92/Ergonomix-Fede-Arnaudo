@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Button, ButtonGroup, Box, IconButton } from "@material-ui/core";
+import {
+  Button,
+  ButtonGroup,
+  Box,
+  IconButton,
+  Typography,
+} from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import { AddShoppingCart } from "@material-ui/icons";
@@ -35,6 +41,9 @@ const ItemCount = ({ stock, onAdd }) => {
           <AddShoppingCart m={2} />
         </IconButton>
       </ButtonGroup>
+      <Typography variant="h4" m={2} gutterBottom>
+        Available stock: {stock}
+      </Typography>
     </div>
   );
 };
