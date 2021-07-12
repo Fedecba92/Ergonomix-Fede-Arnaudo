@@ -16,6 +16,7 @@ import useStyles from "./styles";
 
 const Cart = () => {
   const classes = useStyles();
+
   const { cart, clearCart } = useCartContext();
 
   if (!cart.length) return <Redirect to="/" />;
