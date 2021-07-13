@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import {
-  Button,
-  ButtonGroup,
-  Box,
-  IconButton,
-  Typography,
-} from "@material-ui/core";
+import { Button, ButtonGroup, Box, IconButton } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import { AddShoppingCart } from "@material-ui/icons";
+//import { useCartContext } from "../../Context/CartContext";
 
 const ItemCount = ({ stock, onAdd }) => {
   const [toAdd, setToAdd] = useState(stock ? 1 : 0);
+  //const [product, setProduct] = useState([]);
+  //const { database } = useCartContext();
+  //setProduct(database);
+
   return (
     <div mt={2}>
       <ButtonGroup variant="contained">
@@ -41,9 +40,9 @@ const ItemCount = ({ stock, onAdd }) => {
           <AddShoppingCart m={2} />
         </IconButton>
       </ButtonGroup>
-      <Typography variant="h4" m={2} gutterBottom>
-        Available stock: {stock}
-      </Typography>
+      <Box component="label" m={1}>
+        stock: {stock}
+      </Box>
     </div>
   );
 };

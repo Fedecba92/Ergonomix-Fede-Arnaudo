@@ -19,7 +19,7 @@ export const CartProvider = ({ children }) => {
 
   const isInCart = (id) => cart.some((item) => item.id === id);
 
-  const addToCart = (item, quantity, stock) => {
+  const addToCart = (item, quantity) => {
     if (isInCart(item.id)) {
       const newCart = cart.map((cartElement) => {
         if (cartElement.id === item.id) {
