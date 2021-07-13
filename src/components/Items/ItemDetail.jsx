@@ -21,7 +21,7 @@ const ItemDetail = ({ product }) => {
   const onAdd = (qty) => {
     addToCart(product, qty);
     const notify = () =>
-      toast.success("Product added to cart!", {
+      toast.success("Product added to cart! 🛒", {
         position: toast.POSITION.TOP_CENTER,
       });
     notify();
