@@ -11,13 +11,19 @@ import {
 import ItemCount from "./ItemCount";
 import useStyles from "./styles.js";
 import { useCartContext } from "../../Context/CartContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Item = ({ product }) => {
-  const { cart, addToCart } = useCartContext();
+  const { cart, addToCart, actualStock } = useCartContext();
   console.log(cart);
   const onAdd = (qty) => {
     addToCart(product, qty);
-    alert("Product added to cart");
+    const notify = () =>
+      toast.success("Product added to cart!", {
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+    notify();
   };
   const classes = useStyles();
   return (
@@ -41,10 +47,11 @@ const Item = ({ product }) => {
         </div>
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
-        {product.stock > 0 && (
-          <ItemCount onAdd={onAdd} stock={product.stock} mx="auto" />
+        {actualStock(product) > 0 && (
+          <ItemCount onAdd={onAdd} stock={actualStock(product)} mx="auto" />
         )}
       </CardActions>
+      <ToastContainer />
     </Card>
   );
 };

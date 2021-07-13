@@ -3,13 +3,9 @@ import { Button, ButtonGroup, Box, IconButton } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import { AddShoppingCart } from "@material-ui/icons";
-//import { useCartContext } from "../../Context/CartContext";
 
 const ItemCount = ({ stock, onAdd }) => {
   const [toAdd, setToAdd] = useState(stock ? 1 : 0);
-  //const [product, setProduct] = useState([]);
-  //const { database } = useCartContext();
-  //setProduct(database);
 
   return (
     <div mt={2}>
@@ -36,7 +32,13 @@ const ItemCount = ({ stock, onAdd }) => {
         >
           <AddIcon />
         </Button>
-        <IconButton aria-label="Add to Cart" onClick={() => onAdd(toAdd)}>
+        <IconButton
+          aria-label="Add to Cart"
+          onClick={() => {
+            onAdd(toAdd);
+            setToAdd(1);
+          }}
+        >
           <AddShoppingCart m={2} />
         </IconButton>
       </ButtonGroup>

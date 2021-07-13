@@ -8,6 +8,7 @@ export const useCartContext = () => useContext(CartContext);
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [database, setDatabase] = useState([]);
+  const [prodInCart, setProdInCart] = useState(null);
 
   const clearCart = () => setCart([]);
 
@@ -34,7 +35,12 @@ export const CartProvider = ({ children }) => {
       setCart((prev) => [...prev, { ...item, quantity }]);
     }
   };
-
+  const actualStock = (item) => {
+    const prodInCart = cart.find((prod) => item.id === prod.id);
+    if (prodInCart) {
+      return item.stock - prodInCart.quantity;
+    } else return item.stock;
+  };
   useEffect(() => {
     (async () => {
       const { data } = await axios.get(
@@ -43,7 +49,11 @@ export const CartProvider = ({ children }) => {
 
       setDatabase(data);
     })();
-  }, []);
+    const inCart = cart.reduce((acc, prod) => {
+      return acc + prod.quantity;
+    }, 0);
+    setProdInCart(inCart);
+  }, [cart]);
 
   return (
     <CartContext.Provider
@@ -55,6 +65,8 @@ export const CartProvider = ({ children }) => {
         isInCart,
         database,
         removeProd,
+        actualStock,
+        prodInCart,
       }}
     >
       {children}

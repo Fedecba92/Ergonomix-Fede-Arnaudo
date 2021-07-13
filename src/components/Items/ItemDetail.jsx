@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ItemCount from "./ItemCount";
 import {
   Card,
@@ -6,22 +6,25 @@ import {
   CardContent,
   Typography,
   CardActions,
-  IconButton,
 } from "@material-ui/core";
 
 import useStyles from "./itemDet";
 import { useCartContext } from "../../Context/CartContext";
-import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ItemDetail = ({ product }) => {
   const classes = useStyles();
-  const [event, setEvent] = useState(true);
-  const { cart, addToCart } = useCartContext();
+
+  const { cart, addToCart, actualStock } = useCartContext();
   console.log(cart);
   const onAdd = (qty) => {
     addToCart(product, qty);
-    alert("Product added to cart");
-    setEvent(false);
+    const notify = () =>
+      toast.success("Product added to cart!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    notify();
   };
 
   return (
@@ -42,14 +45,11 @@ const ItemDetail = ({ product }) => {
         </div>
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
-        {event ? (
-          <ItemCount stock={product.stock} onAdd={onAdd} />
-        ) : (
-          <Link to="/cart">
-            <IconButton>Finish shopping</IconButton>
-          </Link>
+        {actualStock(product) > 0 && (
+          <ItemCount onAdd={onAdd} stock={actualStock(product)} mx="auto" />
         )}
       </CardActions>
+      <ToastContainer />
     </Card>
   );
 };
