@@ -21,7 +21,12 @@ const Item = ({ product }) => {
     addToCart(product, qty);
     const notify = () =>
       toast.success("Product added to cart! 🛒", {
-        position: toast.POSITION.BOTTOM_CENTER,
+        position: "bottom-center",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
       });
     notify();
   };
@@ -47,8 +52,10 @@ const Item = ({ product }) => {
         </div>
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
-        {actualStock(product) > 0 && (
+        {actualStock(product) > 0 ? (
           <ItemCount onAdd={onAdd} stock={actualStock(product)} mx="auto" />
+        ) : (
+          <h2> Not available stock</h2>
         )}
       </CardActions>
       <ToastContainer />

@@ -22,7 +22,12 @@ const ItemDetail = ({ product }) => {
     addToCart(product, qty);
     const notify = () =>
       toast.success("Product added to cart! 🛒", {
-        position: toast.POSITION.TOP_CENTER,
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
       });
     notify();
   };
