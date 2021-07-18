@@ -1,18 +1,11 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { useCartContext } from "../../Context/CartContext";
-import {
-  Card,
-  CardMedia,
-  CardContent,
-  Typography,
-  CardActions,
-  IconButton,
-  Box,
-} from "@material-ui/core";
+import { IconButton, Box } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { Header, Image, Table } from "semantic-ui-react";
 
 import useStyles from "./styles";
 //import Spinner from "../Loader/Spinner";
@@ -35,38 +28,42 @@ const Cart = () => {
     <div>
       <Grid container justify="center" spacing={4}>
         {cart.map((product) => (
-          <Grid item key={product.id} xs={12} sm={6} lg={3}>
-            <Card className={classes.Root}>
-              <CardMedia
-                className={classes.media}
-                image={product.pictureUrl}
-                title={product.title}
-              />
-              <CardContent>
-                <div className={classes.cardContent}>
-                  <Typography variant="h5" gutterBottom>
-                    {product.title}
-                  </Typography>
-                  <Typography variant="h5" gutterBottom>
-                    x {product.quantity}
-                  </Typography>
-                  <Typography variant="h5" gutterBottom>
-                    $ {product.price * product.quantity}
-                  </Typography>
-                </div>
-              </CardContent>
-              <CardActions disableSpacing className={classes.cardActions}>
-                <IconButton
-                  aria-label="Remove product"
-                  onClick={() => {
-                    deleteProd(product);
-                  }}
-                >
-                  <DeleteIcon color="secondary" />
-                </IconButton>
-              </CardActions>
-            </Card>
-          </Grid>
+          <Table>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell width={5}>Product</Table.HeaderCell>
+                <Table.HeaderCell>Quantity</Table.HeaderCell>
+                <Table.HeaderCell>Price per unit</Table.HeaderCell>
+                <Table.HeaderCell>SubTotal</Table.HeaderCell>
+                <Table.HeaderCell>Delete product</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              <Table.Row>
+                <Table.Cell>
+                  <Header as="body1" image>
+                    <Image src={product.pictureUrl} rounded size="medium" />
+                    <Header.Content>
+                      <Header.Subheader>{product.title}</Header.Subheader>
+                    </Header.Content>
+                  </Header>
+                </Table.Cell>
+                <Table.Cell>x {product.quantity}</Table.Cell>
+                <Table.Cell>$ {product.price}</Table.Cell>
+                <Table.Cell>$ {product.price * product.quantity}</Table.Cell>
+                <Table.Cell>
+                  <IconButton
+                    aria-label="Remove product"
+                    onClick={() => {
+                      deleteProd(product);
+                    }}
+                  >
+                    <DeleteIcon color="secondary" />
+                  </IconButton>
+                </Table.Cell>
+              </Table.Row>
+            </Table.Body>
+          </Table>
         ))}
         <IconButton aria-label="empty cart" onClick={clearCart}>
           Empty cart
