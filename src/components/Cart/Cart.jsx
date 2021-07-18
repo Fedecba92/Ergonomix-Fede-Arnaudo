@@ -27,17 +27,17 @@ const Cart = () => {
   return (
     <div>
       <Grid container justify="center" spacing={4}>
-        {cart.map((product) => (
-          <Table>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell width={5}>Product</Table.HeaderCell>
-                <Table.HeaderCell>Quantity</Table.HeaderCell>
-                <Table.HeaderCell>Price per unit</Table.HeaderCell>
-                <Table.HeaderCell>SubTotal</Table.HeaderCell>
-                <Table.HeaderCell>Delete product</Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
+        <Table color="blue">
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell width={5}>Product</Table.HeaderCell>
+              <Table.HeaderCell>Quantity</Table.HeaderCell>
+              <Table.HeaderCell>Price per unit</Table.HeaderCell>
+              <Table.HeaderCell>SubTotal</Table.HeaderCell>
+              <Table.HeaderCell>Delete product</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          {cart.map((product) => (
             <Table.Body>
               <Table.Row>
                 <Table.Cell>
@@ -63,8 +63,9 @@ const Cart = () => {
                 </Table.Cell>
               </Table.Row>
             </Table.Body>
-          </Table>
-        ))}
+          ))}
+        </Table>
+
         <IconButton aria-label="empty cart" onClick={clearCart}>
           Empty cart
           <RemoveShoppingCartIcon color="secondary" className={classes.empty} />
