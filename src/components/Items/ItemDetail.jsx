@@ -6,6 +6,7 @@ import {
   CardContent,
   Typography,
   CardActions,
+  Box,
 } from "@material-ui/core";
 
 import useStyles from "./itemDet";
@@ -50,8 +51,12 @@ const ItemDetail = ({ product }) => {
         </div>
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
-        {actualStock(product) > 0 && (
+        {actualStock(product) > 0 ? (
           <ItemCount onAdd={onAdd} stock={actualStock(product)} mx="auto" />
+        ) : (
+          <Box component="h2" m={2}>
+            Not available stock!
+          </Box>
         )}
       </CardActions>
       <ToastContainer />

@@ -16,11 +16,16 @@ const StyledBadge = withStyles((theme) => ({
 
 export default function CartWidget() {
   const { prodInCart } = useCartContext();
+
   return (
-    <IconButton aria-label="cart">
-      <StyledBadge badgeContent={prodInCart} color="secondary">
-        <ShoppingCartIcon />
-      </StyledBadge>
-    </IconButton>
+    <div>
+      {prodInCart && (
+        <IconButton aria-label="cart">
+          <StyledBadge badgeContent={prodInCart} color="secondary">
+            <ShoppingCartIcon />
+          </StyledBadge>
+        </IconButton>
+      )}
+    </div>
   );
 }

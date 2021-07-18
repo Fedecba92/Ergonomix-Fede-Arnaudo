@@ -8,22 +8,26 @@ import {
   Typography,
   CardActions,
   IconButton,
+  Box,
 } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 import useStyles from "./styles";
+//import Spinner from "../Loader/Spinner";
 
 const Cart = () => {
   const classes = useStyles();
 
-  const { cart, clearCart, removeProd } = useCartContext();
+  const { cart, clearCart, removeProd, totalPrice } = useCartContext();
 
   const deleteProd = (Prod) => {
     console.log("productos a Eliminar:", Prod);
     removeProd(Prod);
   };
+
+  //if (providerLoading) return <Spinner />;
 
   if (!cart.length) return <Redirect to="/" />;
 
@@ -68,6 +72,9 @@ const Cart = () => {
           Empty cart
           <RemoveShoppingCartIcon color="secondary" className={classes.empty} />
         </IconButton>
+        <Box component="h2" m={3}>
+          Total: ${totalPrice}
+        </Box>
       </Grid>
     </div>
   );

@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ItemList from "../components/List/ItemList";
-import { useCartContext } from "../Context/CartContext";
+import { prodsCollection } from "../Firebase";
 
 const ItemListContainer = () => {
   const { categoryName } = useParams();
-  const { database } = useCartContext();
+
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    if (!categoryName) return setProducts(database);
-    const catProd = database.filter((prod) => prod.category === categoryName);
-    setProducts(catProd);
-  }, [categoryName, database]);
+    (async () => {
+      let collection = prodsCollection;
+      if (categoryName)
+        collection = prodsCollection.where("category", "==", categoryName);
+      const response = await collection.get();
+      setProducts(
+        response.docs.map((prod) => ({ id: prod.id, ...prod.data() }))
+      );
+    })();
+  }, [categoryName]);
   return (
     <div>
       <ItemList products={products} />

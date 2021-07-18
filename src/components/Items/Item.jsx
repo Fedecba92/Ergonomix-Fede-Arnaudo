@@ -6,6 +6,7 @@ import {
   CardContent,
   CardActions,
   Typography,
+  Box,
 } from "@material-ui/core";
 
 import ItemCount from "./ItemCount";
@@ -55,7 +56,9 @@ const Item = ({ product }) => {
         {actualStock(product) > 0 ? (
           <ItemCount onAdd={onAdd} stock={actualStock(product)} mx="auto" />
         ) : (
-          <h2> Not available stock</h2>
+          <Box component="h2" m={2}>
+            Not available stock!
+          </Box>
         )}
       </CardActions>
       <ToastContainer />
