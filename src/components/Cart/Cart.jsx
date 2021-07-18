@@ -30,10 +30,10 @@ const Cart = () => {
         <Table color="blue">
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell width={5}>Product</Table.HeaderCell>
+              <Table.HeaderCell width={8}>Product</Table.HeaderCell>
               <Table.HeaderCell>Quantity</Table.HeaderCell>
               <Table.HeaderCell>Price per unit</Table.HeaderCell>
-              <Table.HeaderCell>SubTotal</Table.HeaderCell>
+              <Table.HeaderCell>Total</Table.HeaderCell>
               <Table.HeaderCell>Delete product</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
