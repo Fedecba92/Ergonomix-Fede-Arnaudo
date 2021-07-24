@@ -1,1 +1,2 @@
-Desafios CartView y itemCollection 1.
+Desafios itemCollection 2.
+Ver(Update del stock y falla del id en el toasting)
