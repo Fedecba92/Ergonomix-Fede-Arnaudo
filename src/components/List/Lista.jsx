@@ -9,7 +9,6 @@ import {
   Divider,
 } from "@material-ui/core";
 import StoreIcon from "@material-ui/icons/Store";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import HelpIcon from "@material-ui/icons/Help";
 import CategoryIcon from "@material-ui/icons/Category";
 
@@ -33,12 +32,7 @@ const Lista = () => {
             <CategoryMenu />
           </ListItemText>
         </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <AccountCircleIcon />
-          </ListItemIcon>
-          <ListItemText primary="Login" />
-        </ListItem>
+
         <ListItem button>
           <ListItemIcon>
             <HelpIcon />
