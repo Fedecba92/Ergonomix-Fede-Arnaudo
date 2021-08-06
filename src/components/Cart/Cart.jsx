@@ -7,7 +7,7 @@ import { IconButton, Box } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { Header, Image, Table, Button } from "semantic-ui-react";
+import { Header, Image, Table, Button, Form } from "semantic-ui-react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -18,7 +18,10 @@ const Cart = () => {
   const classes = useStyles();
 
   const { cart, clearCart, removeProd, totalPrice } = useCartContext();
-  const [idOrder, setIdOrder] = useState(null);
+  const [idOrder, setIdOrder] = useState("");
+  const [mail, setMail] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
 
   const deleteProd = (Prod) => {
     console.log("productos a Eliminar:", Prod);
@@ -41,8 +44,8 @@ const Cart = () => {
     return Promise.resolve({ products, totalCart });
   };
 
-  const notify = () => {
-    toast.success(`Your id order is ${idOrder}`, {
+  const notify = (id) => {
+    toast.success(`Your order has been confirmed, your order id is : ${id}`, {
       position: "bottom-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -57,9 +60,9 @@ const Cart = () => {
       const order = ordersCollection;
       const newOrder = {
         buyer: {
-          email: "fedecba92@gmail.com",
-          name: "Federico Arnaudo",
-          phone: "+543517493222",
+          email: mail,
+          name: name,
+          phone: phone,
         },
         date: firebase.firestore.Timestamp.fromDate(new Date()),
         products: res.products,
@@ -70,8 +73,11 @@ const Cart = () => {
         .add(newOrder)
         .then(({ id }) => {
           setIdOrder(id);
-          notify();
-          console.log("Your order has been processed successfully: ID", id);
+          notify(id);
+          console.log(
+            "Your order has been processed successfully: ID",
+            idOrder
+          );
         })
         .catch((error) => {
           console.log(error);
@@ -87,7 +93,22 @@ const Cart = () => {
 
   return (
     <>
+      <Header size="large">Your details:</Header>
       <Grid container justify="center" spacing={4}>
+        <Form>
+          <Form.Field onChange={(e) => setMail({ val: e.target.value })}>
+            <label>E-mail</label>
+            <input placeholder="E-mail" />
+          </Form.Field>
+          <Form.Field onChange={(e) => setName({ val: e.target.value })}>
+            <label>Full name</label>
+            <input placeholder="Full name" />
+          </Form.Field>
+          <Form.Field onChange={(e) => setPhone({ val: e.target.value })}>
+            <label>Phone</label>
+            <input placeholder="Phone" />
+          </Form.Field>
+        </Form>
         <Grid item xs={12} sm={12} lg={12}>
           <Table color="blue">
             <Table.Header>
