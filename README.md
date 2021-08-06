@@ -7,11 +7,11 @@ Se recomienda una instalacion previa para que dichas dependecias sean instaladas
 
 ## IDIOMAS
 
-Este proyecto contiene informacion tanto en ingles
+Este proyecto contiene informacion en ingles
 
 ## VISTA PREVIA
 
-()
+![image](https://github.com/Fedecba92/Ergonomix-Fede-Arnaudo/blob/main/public/Assets/Animation-gif.gif)
 
 ## Available Scripts
 
